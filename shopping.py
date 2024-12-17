@@ -65,6 +65,7 @@ filtered_data["Shipping Type"].hist(bins=20, ax=ax)
 ax.set_xlabel("Rodzaj wysyłki")
 ax.set_ylabel("Średnia kwota zakupów (USD)")
 ax.hist("Rodzaj wysyłki", rwidth=30)
+plt.tick_params(axis='x', which='major', labelsize=5)
 st.pyplot(fig)
 
 # Wykres 5: Zakupy wg regionu
