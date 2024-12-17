@@ -60,16 +60,15 @@ st.pyplot(fig)
 
 # Wykres 4: Średnia kwota zakupów wg rodzaju wysyłki
 st.write("### Średnia kwota zakupów wg rodzaju wysyłki")
-shipping_mean = filtered_data.groupby("Shipping Type")["Purchase Amount (USD)"].mean()
 fig, ax = plt.subplots()
-shipping_mean.plot(kind="bar", ax=ax)
+filtered_data["Shipping Type"].hist(bins=20, ax=ax)
 ax.set_xlabel("Rodzaj wysyłki")
 ax.set_ylabel("Średnia kwota zakupów (USD)")
 st.pyplot(fig)
 
 # Wykres 5: Zakupy wg regionu
 st.write("### Liczba zakupów wg Lokalizacji")
-region_counts = filtered_data["Lokalizacja"].value_counts()
+region_counts = filtered_data["Location"].value_counts()
 fig, ax = plt.subplots()
 region_counts.plot(kind="bar", ax=ax)
 ax.set_xlabel("Lokalizacja")
