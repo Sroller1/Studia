@@ -61,7 +61,7 @@ st.pyplot(fig)
 # Wykres 4: Średnia kwota zakupów wg rodzaju wysyłki
 st.write("### Średnia kwota zakupów wg rodzaju wysyłki")
 fig, ax = plt.subplots()
-filtered_data["Shipping Type"].hist(bins=auto, ax=ax)
+filtered_data["Shipping Type"].hist(bins=8, ax=ax)
 ax.set_xlabel("Rodzaj wysyłki")
 ax.set_ylabel("Średnia kwota zakupów (USD)")
 plt.tick_params(axis='x', which='major', labelsize=10)
