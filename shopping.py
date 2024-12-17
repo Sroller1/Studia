@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # Wczytaj dane
 @st.cache
 def load_data():
-    return pd.read_csv('shopping_trends.csv')
+    return pd.read_csv('shopping_trends_updated.csv')
 
 data = load_data()
 
@@ -16,11 +16,15 @@ st.sidebar.title("Opcje analizy")
 # Filtry
 age_filter = st.sidebar.slider("Wiek klienta", int(data["Age"].min()), int(data["Age"].max()), (18, 60))
 category_filter = st.sidebar.multiselect("Kategorie produktów", data["Category"].unique(), data["Category"].unique())
+location_filter = st.sidebar.multiselect("Lokalizacja", data["Location"].unique(), data["Location"].unique())
+shipping_filter = st.sidebar.multiselect("Preferencje wysyłki", data["Shipping Type"].unique(), data["Shipping Type"].unique())
 
 # Filtruj dane
 filtered_data = data[(data["Age"] >= age_filter[0]) & 
                      (data["Age"] <= age_filter[1]) & 
-                     (data["Category"].isin(category_filter))]
+                     (data["Category"].isin(category_filter)) &
+                     (data["Location"].isin(location_filter)) &
+                     (data["Shipping Type"].isin(shipping_filter))]
 
 # Wyświetlanie danych
 st.write("### Filtrowane dane", filtered_data)
@@ -52,4 +56,22 @@ fig, ax = plt.subplots()
 filtered_data["Age"].hist(bins=20, ax=ax)
 ax.set_xlabel("Wiek")
 ax.set_ylabel("Liczba klientów")
+st.pyplot(fig)
+
+# Wykres 4: Średnia kwota zakupów wg rodzaju wysyłki
+st.write("### Średnia kwota zakupów wg rodzaju wysyłki")
+shipping_mean = filtered_data.groupby("Shipping Type")["Purchase Amount (USD)"].mean()
+fig, ax = plt.subplots()
+shipping_mean.plot(kind="bar", ax=ax)
+ax.set_xlabel("Rodzaj wysyłki")
+ax.set_ylabel("Średnia kwota zakupów (USD)")
+st.pyplot(fig)
+
+# Wykres 5: Zakupy wg regionu
+st.write("### Liczba zakupów wg Lokalizacji")
+region_counts = filtered_data["Lokalizacja"].value_counts()
+fig, ax = plt.subplots()
+region_counts.plot(kind="bar", ax=ax)
+ax.set_xlabel("Lokalizacja")
+ax.set_ylabel("Liczba zakupów")
 st.pyplot(fig)
