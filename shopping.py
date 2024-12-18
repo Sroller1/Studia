@@ -17,7 +17,7 @@ st.sidebar.title("Opcje analizy")
 age_filter = st.sidebar.slider("Wiek klienta", int(data["Age"].min()), int(data["Age"].max()), (18, 60))
 category_filter = st.sidebar.multiselect("Kategorie produktów", data["Category"].unique(), data["Category"].unique())
 location_filter = st.sidebar.multiselect("Lokalizacja", data["Location"].unique(), data["Location"].unique())
-review_filter = st.sidebar.slider("Oceny produktów", float(data["Review Rating"].min()), float(data["Review Rating"].max()), (1, 5))
+review_filter = st.sidebar.slider("Oceny produktów", int(data["Review Rating"].min()), int(data["Review Rating"].max()), (1, 5))
 
 # Filtruj dane
 filtered_data = data[(data["Age"] >= age_filter[0]) & 
@@ -61,11 +61,10 @@ st.pyplot(fig)
 # Wykres 4: Stosunek ocen produktów do średniej kwoty zakupów
 st.write("### Średnia kwota zakupów wg rodzaju wysyłki")
 fig, ax = plt.subplots()
-filtered_data["Review Rating"].hist(bins=6, ax=ax)
+filtered_data["Review Rating"].hist(bins=41, ax=ax)
 ax.set_xlabel("Oceny produktów")
 ax.set_ylabel("Średnia kwota zakupów (USD)")
 plt.tick_params(axis='x', which='major', labelsize=10)
-plt.xticks(rotation = 90)
 plt.tight_layout()
 st.pyplot(fig)
 
