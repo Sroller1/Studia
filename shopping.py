@@ -65,6 +65,7 @@ filtered_data["Shipping Type"].hist(bins=20, ax=ax)
 ax.set_xlabel("Rodzaj wysyłki")
 ax.set_ylabel("Średnia kwota zakupów (USD)")
 plt.tick_params(axis='x', which='major', labelsize=10)
+plt.xticks(rotation = 90)
 plt.tight_layout()
 st.pyplot(fig)
 
