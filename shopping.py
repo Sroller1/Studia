@@ -11,7 +11,7 @@ data = load_data()
 
 # Ustawienia strony
 st.title("Shopping Trends Dashboard")
-st.sidebar.title("Opcje analizy")
+st.sidebar.title("Kryteria")
 
 # Filtry
 age_filter = st.sidebar.slider("Wiek klienta", int(data["Age"].min()), int(data["Age"].max()), (18, 60))
