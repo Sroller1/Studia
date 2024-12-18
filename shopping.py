@@ -58,10 +58,11 @@ ax.set_xlabel("Wiek")
 ax.set_ylabel("Liczba klientów")
 st.pyplot(fig)
 
-# Wykres 4: Stosunek wieku do średniej kwoty zakupów
+# Wykres 4: Średnia kwota zakupów wg rodzaju wysyłki
 st.write("### Średnia kwota zakupów wg rodzaju wysyłki")
+shipping_mean = filtered_data.groupby("Shipping Type")["Purchase Amount (USD)"].mean()
 fig, ax = plt.subplots()
-filtered_data["Shipping Type"].hist(bins=20, ax=ax)
+shipping_mean.plot(kind="bar", ax=ax)
 ax.set_xlabel("Rodzaj wysyłki")
 ax.set_ylabel("Średnia kwota zakupów (USD)")
 plt.tick_params(axis='x', which='major', labelsize=10)
