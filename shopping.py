@@ -24,7 +24,7 @@ filtered_data = data[(data["Age"] >= age_filter[0]) &
                      (data["Age"] <= age_filter[1]) & 
                      (data["Category"].isin(category_filter)) &
                      (data["Location"].isin(location_filter)) &
-                     (data["Review Rating"].isin(review_filter))]
+                     (data["Shipping Type"].isin(shipping_filter))]
 
 # Wyświetlanie danych
 st.write("### Filtrowane dane", filtered_data)
